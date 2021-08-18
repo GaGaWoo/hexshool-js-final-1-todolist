@@ -66,8 +66,7 @@ const ulList = document.querySelector('.list');
 const ulTab = document.querySelector('.tab');
 const btnClear = document.querySelector('.btnClear');
 
-// todo : key enter, esc
-btn_add.addEventListener('click', (e) => {
+function addTodoAndRender(e) {
     e.preventDefault();
     const txt = txtAddTodo.value;
 
@@ -75,7 +74,19 @@ btn_add.addEventListener('click', (e) => {
     todolist.addTodo(txt);
     todolist.render(ulList);
     txtAddTodo.value = '';
+}
+btn_add.addEventListener('click', (e) => {
+    addTodoAndRender(e);
 });
+txtAddTodo.addEventListener('keydown', (e) => {
+    //console.log(e.keyCode);
+
+    if (e.keyCode == 13) {
+        addTodoAndRender(e);
+    } else if (e.keyCode == 27) {
+        txtAddTodo.value = '';
+    }
+})
 
 ulList.addEventListener('click', (e) => {
     const elm = e.target;
